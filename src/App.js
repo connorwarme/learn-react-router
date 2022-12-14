@@ -10,8 +10,13 @@ const App = () => {
 
   return (
     <div className="App">
-      <button type="button" onClick={handleClick}>Click Me</button>
-      <h1>{heading}</h1>
+      <ul className="animals">
+        <li>Sharks</li>
+        <li>Whales</li>
+        <li>Octopus</li>
+        <li>Dolphins</li>
+        <li>Turtles</li>
+      </ul>
     </div>
   );
 }
