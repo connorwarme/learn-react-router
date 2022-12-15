@@ -1,41 +1,19 @@
 import React, { useState, useEffect } from "react";
-import Profile from "./Profile";
+import Home from "./Home";
 import './App.css';
-
-window.fetch = jest.fn(() => {
-  const user = { name: 'Lionel Messi', email: 'lmessi@legend.com'};
-
-  return Promise.resolve({
-    json: () => Promise.resolve(user),
-  })
-})
-const fuck = () => {
-  const user = { name: 'Lionel Messi', email: 'lmessi@legend.com'};
-    
-      return Promise.reject({
-        message: 'API is down',
-      })
-}
+import { hasSelectionSupport } from "@testing-library/user-event/dist/utils";
 
 const App = () => {
-  const [user, setUser] = useState(null);
-  const [error, setError] = useState('');
+  const [inputValue, setInput] = useState('');
 
-  useEffect(() => {
-    fuck()
-      .then((response) => response.json())
-      .then((user) => setUser(user))
-      .catch((error) => setError(error.message));
-  }, []);
-
-  if (error) {
-    return <span>{error}</span>;
+  const handleChange = (e) => {
+    setInput(e.target.value);
   }
 
-  return(
-  <div>
-    {user ? <Profile user={user} /> : <span>Loading...</span>}
-  </div>
+  return (
+    <div>
+      <Home handleChange={handleChange} inputValue={inputValue} />
+    </div>
   )
 }
 

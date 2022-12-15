@@ -1,9 +1,12 @@
 import React from "react";
 
-const Home = () => {
+const Home = (props) => {
+    const {handleChange, inputValue} = props;
+
     return (
         <div>
-            <h1>Home Page!</h1>
+        <label for="win">Win?</label>
+            <input id="win" onChange={handleChange} value={inputValue} />
         </div>
     )
 }
