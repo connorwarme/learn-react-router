@@ -1,11 +1,14 @@
 import React from "react";
 
-const Profile = () => {
-    return(
-        <div>
-            <h1>Hello from Profile Component</h1>
-        </div>
-    )
+const Profile = (props) => {
+  const { name, email } = props.user;
+
+  return (
+    <div className="person">
+        <h3>{name}</h3>
+        <span>{email}</span>
+    </div>
+  );
 }
 
 export default Profile;

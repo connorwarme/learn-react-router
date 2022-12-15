@@ -1,24 +1,42 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import Profile from "./Profile";
 import './App.css';
 
-const App = () => {
-  const [heading, setHeading] = useState('Magnificent Monkeys');
+window.fetch = jest.fn(() => {
+  const user = { name: 'Lionel Messi', email: 'lmessi@legend.com'};
 
-  const handleClick = () => {
-    setHeading('Radical Rhinos');
+  return Promise.resolve({
+    json: () => Promise.resolve(user),
+  })
+})
+const fuck = () => {
+  const user = { name: 'Lionel Messi', email: 'lmessi@legend.com'};
+    
+      return Promise.reject({
+        message: 'API is down',
+      })
+}
+
+const App = () => {
+  const [user, setUser] = useState(null);
+  const [error, setError] = useState('');
+
+  useEffect(() => {
+    fuck()
+      .then((response) => response.json())
+      .then((user) => setUser(user))
+      .catch((error) => setError(error.message));
+  }, []);
+
+  if (error) {
+    return <span>{error}</span>;
   }
 
-  return (
-    <div className="App">
-      <ul className="animals">
-        <li>Sharks</li>
-        <li>Whales</li>
-        <li>Octopus</li>
-        <li>Dolphins</li>
-        <li>Turtles</li>
-      </ul>
-    </div>
-  );
+  return(
+  <div>
+    {user ? <Profile user={user} /> : <span>Loading...</span>}
+  </div>
+  )
 }
 
 export default App;
