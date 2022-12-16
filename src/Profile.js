@@ -6,7 +6,7 @@ const Profile = (props) => {
   return (
     <div className="person">
         <h3>{name}</h3>
-        <span>{email}</span>
+        <span data-testid='span-id'>{email}</span>
     </div>
   );
 }
